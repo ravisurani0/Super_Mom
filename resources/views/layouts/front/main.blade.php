@@ -1,5 +1,4 @@
 
-
 @include('layouts.front.header')
 
 @yield('content')

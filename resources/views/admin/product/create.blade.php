@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['page_title'=>'Product'])
 
 @section('content')
 <div class="container">
@@ -8,9 +8,9 @@
         {{ Session::get('product-attribute') }}
     </div>
     @endif
-    @if($errors->any())
+    <!-- @if($errors->any())
     {!! implode('', $errors->all('<div>:message</div>')) !!}
-    @endif
+    @endif -->
     <form class="form" id="productform" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
         <div class="card card-custom card-sticky" id="kt_page_sticky_card">
             <div class="card-header">
@@ -44,8 +44,17 @@
                             <div class="form-group row">
                                 <label class="col-3">Title</label>
                                 <div class="col-9">
-                                    <input type="text" class="form-control  {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name" placeholder="Enter Name" value="{{ old('name') }}" />
+                                    <input type="text" class="form-control  {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name" placeholder="Enter Name" value="{{ old('name') }}" onKeyUp="setCMSKey(this)" />
                                     @error('name')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Slug</label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control  {{ $errors->has('slug') ? 'is-invalid' : '' }}" name="slug" id="slug" placeholder="Enter Slug" value="{{ old('slug') }}" readonly />
+                                    @error('slug')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -69,10 +78,26 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-3">Category</label>
+                                <div class="col-9">
+                                    <select class="form-control  customattributerequired {{ $errors->has('category.*') ? 'is-invalid' : '' }} " id="category" name="category">
+                                        <option value="">Select Category</option>
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">
+                                            {{ $category->title }}
+                                        </option>
+                                        @endforeach
+
+                                    </select>
+                                    @error('category.*')
+                                    <span class="invalid-feedback">Category is required.</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-3">Price</label>
                                 <div class="col-9">
                                     <div class="input-group mb-3">
-
                                         <input type="number" placeholder="price" step=".01" class="form-control  {{ $errors->has('price') ? 'is-invalid' : '' }}" name="price" placeholder="Enter Price" value=" {{ old('price') }}">
                                         <div class="input-group-append">
                                             <span class="input-group-text">₹</span>
@@ -94,7 +119,7 @@
                                         <option value="28">28% gst</option>
                                     </select>
 
-                                    @error('gst')
+                                    @error('gst_rate')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -118,32 +143,144 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-3">Order</label>
+                                <label class="col-3">Serial Order</label>
                                 <div class="col-9">
-                                    <input id="order" type="number" class="form-control {{ $errors->has('order') ? 'is-invalid' : '' }}" name="order" value="{{ old('order') }}" min="0">
-                                    @error('order')
+                                    <input id="sort_order" type="number" class="form-control {{ $errors->has('sort_order') ? 'is-invalid' : '' }}" name="sort_order" value="{{ old('sort_order')?old('sort_order'):0 }}" min="0">
+                                    @error('sort_order')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="form-group row" id="image">
-                                <label class="col-3"> Image</label>
+                            <div class="form-group row">
+                                <label class="col-3">Select Any</label>
                                 <div class="col-9">
-                                    <input id="image" type="file" class="form-control" name="image" accept="image/*">
+                                    <label class="form-group checkbox checkbox-circle checkbox-primary">
+                                        <input type="checkbox" name="is_best_seller" id="is_best_seller" {{ old('is_best_seller') == 1 ? 'checked' : '' }} value="1">Bestseller
+                                        <span></span></label>
+                                    <label class="form-group checkbox checkbox-circle checkbox-primary">
+                                        <input type="checkbox" name="is_new_product" id="is_new_product" {{ old('is_new_product') == 1 ? 'checked' : '' }} value="1">New Product
+                                        <span></span></label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Long Description</label>
+                                <div class="col-9">
+                                    <textarea class="form-control  {{ $errors->has('long_description') ? 'is-invalid' : '' }}" name="long_description" value="{{ old('long_description') }}" placeholder="Enter Long Description" id="long_description" style=" min-width:200px; max-width:100%;min-height:75px;height:100%;width:100%;">{{ old('long_description') }}</textarea>
+                                    @error('long_description')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Meta Tag Keywords</label>
+                                <div class="col-9">
+                                    <input id="tags" class="form-control tagify" name="tags" placeholder="type..." value="{{ old('tags') }}" autofocus="" data-blacklist=".bbb,aaa">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Status</label>
+                                <div class="col-9">
+                                    <select id="status" name="status" class="form-control  customrequired {{ $errors->has('status') ? 'is-invalid' : '' }}">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                    @error('status')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <h3 class="text-dark font-weight-bold mb-10">Produst`s image:</h3>
+                            <div class="form-group row" id="image">
+                                <label class="col-3">Gallery Image</label>
+                                <div class="col-9">
+                                    <input class="form-control" type="file" id="files" name="gallery_image[]" id="gallery_image" accept="image/*" multiple>
                                     @error('image')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
+                </div>
+                <br>
+                <hr>
+                <div>
+                    <div class="d-flex justify-content-between">
+                        <h3 class="text-dark font-weight-bold mb-10">Additional Info:</h3>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <th style="width:10%">Sort Order</th>
+                            <th style="width:30%">Title</th>
+                            <th style="width:60%">Details</th>
+                            <th style="width:20%">Action</th>
+                        </thead>
+                        <tbody id="additional_info">
+                            <!-- <tr>
+                                <td>
+                                    <input class="form-control " type="number" id="sortOrder" name="sortOrder[]" value="` + additionalInfoCounter + `" min='0' />
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" id="title" name="title[]" />
+                                </td>
+                                <td>
+                                    <textarea class="form-control " name="details[]" value="" placeholder="Enter Long Description" id="details"></textarea>
+                                </td>
+                                <td>
+                                    <button type="button" class=" btn btn-sm btn-danger h-100" onclick="removeAdditionalInfo(` + additionalInfoCounter + `)">Remove</button>
+                                </td>
+                            </tr> -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><button type="button" class="btn btn-primary btn-sm h-100" onclick="addNewDetails()">Add</button></td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+
                 </div>
             </div>
         </div>
     </form>
 </div>
 @endsection
+<script>
+    var additionalInfoCounter = 1
+
+    function addNewDetails() {
+        var html = `
+        <tr id="additional_info_` + additionalInfoCounter + `">
+            <td>
+                <input class="form-control " type="number" id="sortOrder" name="sortOrder[]" value="` + additionalInfoCounter + `" min='0' />
+            </td>
+            <td>
+                <input class="form-control" type="text" id="title" name="title[]" />
+            </td>
+            <td>
+                <textarea class="form-control " name="details[]" value="" placeholder="Enter Long Description" id="details"></textarea>
+            </td>
+            <td>
+                <button type="button" class=" btn btn-sm btn-danger h-100" onclick="removeAdditionalInfo(` + additionalInfoCounter + `)">Remove</button>
+            </td>
+        </tr>
+            `
+
+        $('#additional_info').append(html)
+        additionalInfoCounter++;
+    }
+
+    function removeAdditionalInfo(id) {
+        document.getElementById('additional_info_' + id).remove()
+    }
+</script>
+<script>
+    function setCMSKey(event) {
+        document.getElementById('slug').value = event.value.trim().replaceAll(' ', '_').toLowerCase();
+    }
+</script>
 <style>
     .error {
         font-size: 0.9rem;
@@ -162,20 +299,17 @@
     }
 </style>
 
+
 @section('scripts')
 
 <script src="{{asset('plugins/global/plugins.bundle.js')}}"></script>
 
-<link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-{{-- <script src="{{asset('plugins/global/plugins.bundle.js')}}"></script> --}}
-<script src="{{ asset('plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
-<script src="{{ asset('js/scripts.bundle.js') }}"></script>
-<script src="{{ asset('css/style.bundle.css') }}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="{{ asset('custom/js/product.js') }}"></script>
-<script src="{{ asset('plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
-<script src="{{ asset('js/pages/crud/forms/editors/ckeditor-classic.js') }}"></script>
-<script src="//cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
-<script src="{{ asset('js/pages/crud/forms/editors/ckeditor.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        var inputTag = document.querySelector("#tags");
+        new Tagify(inputTag);
+    });
+    CKEDITOR.config.allowedContent = true;
+    CKEDITOR.replace('long_description');
+</script>
 @endsection

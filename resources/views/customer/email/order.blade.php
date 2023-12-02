@@ -11,7 +11,7 @@
         style="width: 950px;max-width: 100%;margin: auto;text-align: center;font-family: sans-serif;background-color: #ffffff;">
         <tr>
             <td colspan="3" style="background-color: #FFEC00; padding: 20px 0;">
-                <img src="{{ asset('media/logos/gopal-namkeen-logo.png') }}" alt="logo"
+                <img src="" alt="logo"
                     style="width: 160px; max-width: 100%" />
             </td>
         </tr>

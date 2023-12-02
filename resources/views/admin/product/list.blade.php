@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['page_title'=>'Product'])
 {{-- @include('partials.flash-message') --}}
 @section('content')
 <div class="container">
@@ -12,8 +12,8 @@
                         <h3 class="card-label">Product List
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{ route('products.create') }}" class="btn btn-sm btn-primary font-weight-bolder btn-sm"><i class="fa fa-plus"></i>New
-                            Product</a>
+                        <!-- <a href="{{ route('products.import') }}" class="btn btn-sm btn-primary font-weight-bolder btn-sm mx-2"><i class="fa fa-plus"></i>Import Product</a> -->
+                        <a href="{{ route('products.create') }}" class="btn btn-sm btn-primary font-weight-bolder btn-sm"><i class="fa fa-plus"></i>New Product</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -45,6 +45,7 @@
                                 <th>Short Name</th>
                                 <th>Price</th>
                                 <th>HSN Code</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -100,9 +101,14 @@
 
                 },
                 {
-                    data: 'price',
-                    name: 'price',
-                    class: 'text-center'
+
+                    data: 'order_subtotal',
+                    name: 'order_subtotal',
+                    class: 'text-center',
+                    "render": function(data, type, row, meta) {
+                        return '₹ ' + row.price
+
+                    },
 
                 },
                 {
@@ -110,6 +116,14 @@
                     name: 'hsn_code',
                     class: 'text-center'
 
+                },
+                {
+                    data: 'preview',
+                    class: 'text-center',
+                    "render": function(data, type, row, meta) {
+
+                        return row.status ? 'Active' : 'InActive';
+                    }
                 },
 
                 {

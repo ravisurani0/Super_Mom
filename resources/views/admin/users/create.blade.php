@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['page_title'=>'User'])
 
 @section('content')
 <div class="container">
@@ -82,12 +82,13 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Seller Id</label>
-                                <div class="col-9">
+                                <div class="col-6">
                                     <input type="text" class="form-control  {{ $errors->has('seller_id') ? 'is-invalid' : '' }}" name="seller_id" placeholder="Enter Sort Title" value="{{ old('seller_id') }}" />
                                     @error('seller_id')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <!-- <button type="button" class="col-3 btn btn-primary font-weight-bolder"><i class="ki ki-check icon-sm"></i>Approve Seller Id</button> -->
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Discount</label>
@@ -127,18 +128,24 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-3">Status</label>
+                                <label class="col-3">Role</label>
                                 <div class="col-9">
-                                    <select id="user_status" name="user_status" class="form-control  customrequired {{ $errors->has('user_status') ? 'is-invalid' : '' }}">
-                                        <option value="true">Active</option>
-                                        <option value="false">Inactive</option>
+                                    <select id="role" name="role" class="form-control  customrequired {{ $errors->has('role') ? 'is-invalid' : '' }}">
+                                        @if(auth()->user()->role== 1)
+                                        <option value="1" {{auth()->user()->role == 1 ? 'selected' : ''}}>Super Admin</option>
+                                        @endif
+                                        @foreach($roleList as $role)
+                                        @if($role->id != 1)
+                                        <option value="{{$role->id}}" >{{$role->title}}</option>
+                                        @endif
+                                        @endforeach
                                     </select>
-
-                                    @error('user_status')
+                                    @error('role')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
 
                         </div>
                     </div>
@@ -165,21 +172,3 @@
         margin: 10px;
     }
 </style>
-
-@section('scripts')
-
-<script src="{{asset('plugins/global/plugins.bundle.js')}}"></script>
-
-<link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-{{-- <script src="{{asset('plugins/global/plugins.bundle.js')}}"></script> --}}
-<script src="{{ asset('plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
-<script src="{{ asset('js/scripts.bundle.js') }}"></script>
-<script src="{{ asset('css/style.bundle.css') }}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="{{ asset('custom/js/product.js') }}"></script>
-<script src="{{ asset('plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
-<script src="{{ asset('js/pages/crud/forms/editors/ckeditor-classic.js') }}"></script>
-<script src="//cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
-<script src="{{ asset('js/pages/crud/forms/editors/ckeditor.js') }}"></script>
-@endsection

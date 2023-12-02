@@ -19,7 +19,7 @@
 
     <!--end::Fonts-->
     {{-- <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" /> --}}
-    <link rel="shortcut icon" href="{{ asset('media/logos/gopal-namkeen-logo.png') }}" />
+    <link rel="shortcut icon" href="" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -66,8 +66,7 @@
 <!--end::Head-->
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
     @include('partials._page-loader')
 
@@ -80,22 +79,22 @@
 
             {{-- <div class="login login-1 login-signin-on d-flex flex-row-fluid" id="kt_login">
                 <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url({{ url('media/bg/bg-1.jpg') }})">
-                    <div class="login-form text-center text-white position-relative overflow-hidden w-25">
-                        <!--begin::Login Header-->
-                        <div class="d-flex flex-center mb-15">
-                            <a href="{{ route('home') }}">
-                                <img src="{{ url('media/logos/logo-letter-9.png') }}" class="max-h-100px" alt="" />
-                            </a>
-                        </div>
-
-                        @yield('content')
-                    </div>
+            <div class="login-form text-center text-white position-relative overflow-hidden w-25">
+                <!--begin::Login Header-->
+                <div class="d-flex flex-center mb-15">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ url('media/logos/logo-letter-9.png') }}" class="max-h-100px" alt="" />
+                    </a>
                 </div>
-            </div> --}}
 
+                @yield('content')
+            </div>
         </div>
+    </div> --}}
 
-        <!--end::Page-->
+    </div>
+
+    <!--end::Page-->
     </div>
 
     <!--end::Main-->
@@ -105,7 +104,8 @@
     <!-- end::Scripts -->
 
     <script>
-        var HOST_URL = '{{ env('APP_URL') }}'
+        var HOST_URL = '{{ env('
+        APP_URL ') }}'
     </script>
 
     <!--begin::Global Config(global config for global JS scripts)-->

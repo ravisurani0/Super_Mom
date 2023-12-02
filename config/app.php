@@ -161,12 +161,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
-
-
-        Laravel\Socialite\SocialiteServiceProvider::class,
-
 
         /*
          * Package Service Providers...
@@ -183,10 +177,17 @@ return [
 
 
 
-        Intervention\Image\ImageServiceProvider::class,
+        // Intervention\Image\ImageServiceProvider::class,
         Eusonlito\LaravelMeta\MetaServiceProvider::class,
 
-        Barryvdh\DomPDF\ServiceProvider::class,
+        // Barryvdh\DomPDF\ServiceProvider::class,
+
+        // Yajra\DataTables\DataTablesServiceProvider::class,
+        
+        
+        // Laravel\Socialite\SocialiteServiceProvider::class,
+        // Spatie\Permission\PermissionServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 
     /*
@@ -248,6 +249,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Meta'    => Eusonlito\LaravelMeta\Facade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
     ],
 
 

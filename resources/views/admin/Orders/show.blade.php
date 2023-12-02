@@ -1,7 +1,8 @@
-<html xmlns='http://www.w3.org/1999/xhtml'>
+<html>
 
 <head>
     <meta charset="utf-8">
+    <title>Order # {{$order->id}} - Super Mom</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <style type="text/css">
         @media print {
@@ -80,7 +81,11 @@
                         OUR GST No:24AAAFY3262G1ZC
                     </td>
                     <td style="width: 25%; display: table-cell;" class="logo-wrap">
-                        <img src="{{url('/media/Apex_logo.png')}}" style="width: 200px;">
+                        @php
+                        $app_logo = isset($data)? $data['appLogo']['cms_value'] :$appLogo;
+
+                        @endphp
+                        <img src="{{ asset('storage/images/cms/'.$app_logo) }}" style="width: 200px;">
                     </td>
                 </tr>
                 <tr style="width: 100%">
@@ -89,7 +94,7 @@
                 </tr>
                 <tr style="width: 100%">
                     <td style="width: 50%">
-                        <span style="text-transform: uppercase; margin-bottom: 5px;"><b>From : {{$order->user->company_name}}</b></span><br />
+                        <span style="text-transform: uppercase; margin-bottom: 5px;"><b>From : {{ $order->user->company_name }}</b></span><br />
                         <span> {{$order->user->address}}</span><br />
                         <span>MO.{{$order->user->mobile_no}}</span><br />
                         <span>MO.{{$order->user->whatsapp_no}}</span><br />
@@ -99,7 +104,6 @@
                             <tbody>
                                 <tr style="background-color: #dadada;">
                                     <td style="width: 50%; padding: 5px;">PO No: PO {{$order->id}}</td>
-
                                     <td style="width: 50%; padding: 5px;">Date: <?= date('d/m/Y', strtotime($order->created_at)); ?></td>
                                 </tr>
                                 <tr>
@@ -118,13 +122,12 @@
                         </table>
                     </td>
                 </tr>
-
                 @php
                 $totalCartoons = 0;
                 @endphp
                 <tr style="width: 100%">
                     <td colspan='2' class="order-item-wrap">
-                        <table class="order-item" rules="cols" style="width: 100%; <?php echo count($order->orderItems) > 19 ? "page-break-after:always" : ""; ?>">
+                        <table class="order-item" rules="cols" style="width: 100%; <?php echo count($orderItems) > 19 ? "page-break-after:always" : ""; ?>">
                             <thead>
                                 <tr style="border-bottom: 1px solid black; background-color: #dadada;">
                                     <th style="width: 5%;">No.</th>
@@ -137,12 +140,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($order->orderItems as $item)
+                                @foreach($orderItems as $index => $item)
                                 @php
                                 $totalCartoons += $item->qnt;
                                 @endphp
                                 <tr>
-                                    <td style="width: 5%">{{$item->product->id}}</td>
+                                    <td style="width: 5%">{{$index + 1}}</td>
                                     <td style="width: 35%">{{$item->product->name}}
                                         <br>
                                         {{ $item->product->carton_capacity.' X '.$item->qnt }}
@@ -219,7 +222,7 @@
                             @if($order->user->commission > 0)
                             <tr>
                                 <td>DISCOUNT%</td>
-                                <td>{{ $order->user->commission }}%</td>
+                                <td></td>
                                 <td style="text-align: right;">{{ $order->user->discount }}%</td>
                             </tr>
                             @endif
@@ -234,7 +237,6 @@
                                 <td style="text-align: right;">{{ $order->tax_amount }}</td>
                             </tr>
                         </table>
-
                     </td>
                 </tr>
                 @php
@@ -280,7 +282,6 @@
                     <td style="width: 25%">
                         <table style=" width: 100%;" rules="none" class="order-calculations">
                             <tbody>
-
                                 <tr>
                                     <td></td>
                                     <td></td>
@@ -315,12 +316,9 @@
                             </tbody>
                         </table>
                     </td>
-
-
                 </tr>
             </tbody>
             <tfoot>
-
                 <tr style="width: 100%">
                     <td style="width: 75%">
                         <h3 style="display: inline-block; padding-left: 10px; margin: 5px 0 5px 0;">Terms &amp; Conditions:</h3>

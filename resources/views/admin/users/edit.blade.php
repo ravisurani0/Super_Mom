@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['page_title'=>'User'])
 
 @section('content')
 <div class="container">
@@ -35,7 +35,6 @@
                     <div class="col-xl-8">
                         <div class="my-5">
                             <h3 class="text-dark font-weight-bold mb-10">Company`s Info:</h3>
-
                             <div class="form-group row">
                                 <label class="col-3">Company Name</label>
                                 <div class="col-9">
@@ -83,11 +82,21 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-3">Seller Id</label>
-                                <div class="col-9">
-                                    <input type="text" class="form-control  {{ $errors->has('seller_id') ? 'is-invalid' : '' }}" name="seller_id" placeholder="Enter Sort Title" value="{{ $user->seller_id }}" />
+                                <div class="col-6">
+                                    <input type="text" class="form-control {{ $errors->has('seller_id') ? 'is-invalid' : '' }}" name="seller_id" placeholder="Enter Sort Title" value="{{ $user->seller_id }}" />
                                     @error('seller_id')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
+                                </div>
+                                <div class="col-3 ">
+                                    @if($user->seller_id )
+                                    @if(!$user->user_status)
+                                    <button type='button' class='btn btn-primary btn-sm h-100 ' onclick="aproveSeller({{$user->id}},1)">Aprove</button>
+                                    @endif
+                                    @if(!$user->is_block || $user->user_status)
+                                    <button type='button' class='btn btn-danger btn-sm h-100 mx-2' onclick="aproveSeller({{$user->id}},0)">Block</button>
+                                    @endif
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -128,19 +137,23 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-3">Status</label>
+                                <label class="col-3">Role</label>
                                 <div class="col-9">
-                                    <select id="user_status" name="user_status" class="form-control  customrequired {{ $errors->has('user_status') ? 'is-invalid' : '' }}">
-                                        <option value="true">Active</option>
-                                        <option value="false">Inactive</option>
+                                    <select id="role" name="role" class="form-control  customrequired {{ $errors->has('role') ? 'is-invalid' : '' }}">
+                                        @if($user->role == 1)
+                                        <option value="1" {{$user->role  == 1 ? 'selected' : ''}}>Super Admin</option>
+                                        @endif
+                                        @foreach($roleList as $role)
+                                        @if($role->id != 1)
+                                        <option value="{{$role->id}}" {{$role->id == $user->role ? 'selected' : ''}}>{{$role->title}}</option>
+                                        @endif
+                                        @endforeach
                                     </select>
-
-                                    @error('user_status')
+                                    @error('role')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -166,21 +179,20 @@
         margin: 10px;
     }
 </style>
-
 @section('scripts')
+<script>
+    function aproveSeller(sellerId, status) {
+        if (confirm('Are you sure to ' + (status ? 'Aprove' : 'Reject') + '?') == true) {
+            $.post("{{ route('users.approve_seller_id') }}", {
+                    "_token": "{{ csrf_token() }}",
+                    'sellerId': sellerId,
+                    'status': status,
+                },
+                function(data, status) {
+                    window.location.reload();
 
-<script src="{{asset('plugins/global/plugins.bundle.js')}}"></script>
-
-<link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-{{-- <script src="{{asset('plugins/global/plugins.bundle.js')}}"></script> --}}
-<script src="{{ asset('plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
-<script src="{{ asset('js/scripts.bundle.js') }}"></script>
-<script src="{{ asset('css/style.bundle.css') }}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="{{ asset('custom/js/product.js') }}"></script>
-<script src="{{ asset('plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
-<script src="{{ asset('js/pages/crud/forms/editors/ckeditor-classic.js') }}"></script>
-<script src="//cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
-<script src="{{ asset('js/pages/crud/forms/editors/ckeditor.js') }}"></script>
+                });
+        }
+    }
+</script>
 @endsection

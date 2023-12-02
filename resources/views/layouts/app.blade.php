@@ -9,11 +9,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($page_title) ? $page_title . ' | ' : '' }} {{ config('app.name', 'Laravel') }}</title>
+    <title>{{ isset($page_title) ? $page_title . ' - ' : '' }}{{ config('app.name', 'Laravel') }}</title>
     <meta name="description" content="" />
 
     {{-- <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" /> --}}
-    <link rel="shortcut icon" href="{{ asset('media/logos/gopal-namkeen-logo.png') }}" />
+    <link rel="shortcut icon" href="" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -311,14 +311,14 @@
 
     <!--begin::Page Scripts(used by this page)-->
     <script src="{{ asset('js/pages/widgets.js') }}"></script>
-    <script src="{{ asset('custom/js/admin.js') }}"></script>
+    {{-- <script src="{{ asset('custom/js/admin.js') }}"></script> --}}
 
     {{-- <script src="{{ asset('js/pages/features/charts/apexcharts.js') }}"></script> --}}
 
     @yield('scripts')
 
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('custom/js/admin.js') }}" type="text/javascript"></script>
+    {{-- <script src="{{ asset('custom/js/admin.js') }}" type="text/javascript"></script> --}}
     <!--end::Page Scripts-->
     @if (Session('status'))
         <script>

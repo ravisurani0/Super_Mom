@@ -26,6 +26,7 @@ class CreateOrderItemsTable extends Migration
             $table->bigInteger('price')->default(0);
             $table->bigInteger('tax_rate')->default(0);
             $table->bigInteger('tax_amount')->default(0);
+            $table->boolean('status')->default(false);
 
             $table->softDeletes();
             $table->timestamps();

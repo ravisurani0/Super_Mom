@@ -16,7 +16,7 @@
 
     <!--end::Fonts-->
     {{-- <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" /> --}}
-    <link rel="shortcut icon" href="{{ asset('media/logos/gopal-namkeen-logo.png') }}" />
+    <link rel="shortcut icon" href="" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

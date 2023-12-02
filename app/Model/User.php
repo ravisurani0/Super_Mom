@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use Laravel\Passport\HasApiTokens;
+use App\Model\Cart;
+use App\Model\Role;
 
 class User extends Authenticatable
 {
@@ -31,18 +33,23 @@ class User extends Authenticatable
         'email',
         'role',
         'seller_id',
-        'requested_seller_id',
         'discount',
         'commission',
         'account_balance',
         'user_status',
         'email_verified_at',
-        'password'
+        'password',
+        'login_otp',
+        'is_email_verified',
     ];
 
     public function User()
     {
-        $this->belongsTo(Cart::class, 'id', 'created_by');
+        return  $this->belongsTo(Cart::class, 'id', 'created_by');
+    }
+    public function Role()
+    {
+        return $this->belongsTo(Role::class, 'role', 'id');
     }
 
     // protected $guard_name = 'api';
@@ -54,7 +61,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'role', 'password', 'remember_token',
     ];
 
     /**

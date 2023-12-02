@@ -7,8 +7,7 @@
         <!--begin::Copyright-->
         <div class="text-dark order-2 order-md-1">
             <span class="text-muted font-weight-bold mr-2">{{ date('Y') }}©</span>
-            <a href="http://keenthemes.com/metronic" target="_blank"
-                class="text-dark-75 text-hover-primary">{{ config('app.name', 'Laravel') }}</a>
+            <a href="{{env('APP_URL')}}" target="_blank" class="text-dark-75 text-hover-primary">{{ config('app.name', 'Laravel') }}</a>
         </div>
 
         <!--end::Copyright-->

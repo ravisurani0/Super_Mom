@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->double('tax_amount')->nullable();
             $table->double('order_total')->nullable();
             $table->string('transporter')->nullable();
+            $table->boolean('status')->default(false);
 
             $table->softDeletes();
             $table->timestamps();

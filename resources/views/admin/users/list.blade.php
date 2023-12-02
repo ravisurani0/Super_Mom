@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['page_title'=>'User'])
+
 {{-- @include('partials.flash-message') --}}
 @section('content')
 <div class="container">
@@ -9,11 +10,10 @@
 
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
-                        <h3 class="card-label">Company List
+                        <h3 class="card-label">Customer List
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary font-weight-bolder btn-sm"><i class="fa fa-plus"></i>New
-                            Company</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary font-weight-bolder btn-sm"><i class="fa fa-plus"></i>New Customer</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -45,7 +45,7 @@
                                 <th>Mobile No</th>
                                 <th>Seller Id</th>
 
-                                <th>Status</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -107,10 +107,12 @@
 
                 },
                 {
-                    data: 'user_status',
-                    name: 'user_status',
-                    class: 'text-center'
+                    data: 'preview',
+                    class: 'text-center',
+                    "render": function(data, type, row, meta) {
 
+                        return row.role.title;
+                    }
                 },
                 {
                     data: 'action',
@@ -121,20 +123,6 @@
                 },
             ]
         });
-
-        $("#category").on("change", function() {
-            table.draw();
-        });
-        $("#status").on("change", function() {
-            table.draw();
-        });
-        $('#search_title').keyup(function() {
-            table.draw();
-        });
-        $('#search_sku_hsn').keyup(function() {
-            table.draw();
-        });
-
     });
 </script>
 @endsection

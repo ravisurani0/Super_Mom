@@ -10,8 +10,8 @@
     <form method="POST" action="{{ route('login') }}" class="form" id="kt_login_signin_form">
         @csrf
         <div class="form-group">
-            <input class="@error('mobile_no') is-invalid @enderror form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5" type="number" placeholder="Contact No" name="mobile_no" autocomplete="off" value="{{ old('mobile_no') }}" />
-            @error('mobile_no')
+            <input class="@error('login_id') is-invalid @enderror form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mb-5" type="text" placeholder="Contact No Or Email Id" name="login_id" autocomplete="off" value="{{ old('login_id') }}" />
+            @error('login_id')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

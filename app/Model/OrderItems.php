@@ -6,6 +6,10 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Model\Order;
+use App\Model\Product;
+
+
 class OrderItems extends Model
 {
     use SoftDeletes;
@@ -17,6 +21,12 @@ class OrderItems extends Model
         'tax_rate',
         'tax_amount',
         'price',
+        'status'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function Order()
@@ -25,7 +35,7 @@ class OrderItems extends Model
     }
     public function product()
     {
-        return  $this->belongsTo(Product::class, 'products_id', 'id');
+        return  $this->belongsTo(Product::class, 'products_id', 'id')->withTrashed();
     }
     public function OrderItemCount()
     {

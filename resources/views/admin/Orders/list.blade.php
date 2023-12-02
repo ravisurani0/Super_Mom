@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['page_title'=>'Order'])
+
 {{-- @include('partials.flash-message') --}}
 @section('content')
 <div class="container">
@@ -25,6 +26,7 @@
                                 <th>Company Name</th>
                                 <th>Total</th>
                                 <th>Transporter</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -66,21 +68,33 @@
                     data: 'preview',
                     class: 'text-center',
                     "render": function(data, type, row, meta) {
-                        console.log('key----------------------', data);
                         return row.user.company_name;
                     }
                 },
                 {
                     data: 'order_subtotal',
                     name: 'order_subtotal',
-                    class: 'text-center'
-
+                    class: 'text-center',
+                    "render": function(data, type, row, meta) {
+                        return '₹ '+ row.order_total
+                    }
                 },
                 {
                     data: 'transporter',
                     name: 'transporter',
                     class: 'text-center'
 
+                },
+                {
+                    data: 'preview',
+                    class: 'text-center',
+                    "render": function(data, type, row, meta) {
+                        if (row.status) {
+                            return '<span class="text-success p-2 ">completed</span>'
+                        } else {
+                            return '<span class="text-danger p-2 ">Incomplete</span>'
+                        }
+                    }
                 },
                 {
                     data: 'action',

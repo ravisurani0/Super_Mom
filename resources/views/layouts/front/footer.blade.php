@@ -1,156 +1,143 @@
 <footer>
-    <div class="footer theme-bg">
-        
-        
-        
-    </div>
-    <div class="copyrights text-center theme-bg">
-        <span>&#169;  {{ \Carbon\Carbon::now()->year }} Gopal Snacks Limited. All rights reserved.</span>
-    </div>
+    <section class="df-footer__area  bg-theme-5- bg-white">
+        <div class="footer__widgets-area">
+            <div class="container">
+                <div class="footer__widgets-wrapper-2 widgets-5">
+                    <div class="footer__widget">
+                        <div class="mb-40">
+                            <div class="df-footer__logo mb-30">
+                                <a href="#"><img src="{{ asset('storage/images/cms/'.$data['appLogo']['cms_value']) }}" alt="image not found"></a>
+                            </div>
+
+                        </div>
+                        <!-- <div class="social-links">
+                            <ul>
+                                <li><a href="https://www.facebook.com/"><i class="icon-023-facebook-app-symbol"></i></a>
+                                </li>
+                                <li><a href="https://www.instagram.com/"><i class="icon-025-instagram"></i></a>
+                                </li>
+                                <li><a href="https://www.pinterest.com/"><i class="icon-029-pinterest"></i></a>
+                                </li>
+                                <li><a href="https://twitter.com/"><i class="icon-twitter-x"></i></a>
+                                </li>
+                            </ul>
+                        </div> -->
+                    </div>
+                    <div class="footer__widget">
+                        <h4 class="footer__widget-title">Categorys</h4>
+                        <div class="footer__links underline">
+                            <ul>
+                                @foreach($data['categoryTop5'] as $category )
+                                <li><a href="/category/{{$category->slug}}">{{$category->title }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer__widget">
+                        <h4 class="footer__widget-title">Useful Links</h4>
+                        <div class="footer__links underline">
+                            <ul>
+                                <li> <a href="/about-us">About Us</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
+                                <li> <a href="/privacy-policy">Privacy & Policy</a></li>
+                                <li> <a href="/terms-condition">Terms & Condition</a></li>
+                                <!-- <li><a href="#">Our Team</a></li>
+                                <li><a href="#">Clients Feedback</a></li> -->
+                                <!-- <li><a href="#">Coming Soon</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer__widget">
+                        <h4 class="footer__widget-title">Contact Info</h4>
+                        <div class="footer-meta mb-15">
+                            <i class="icon-007-telephone"></i>
+                            <p></p>
+                            <a href="tel:{{ strip_tags($data['contactDetails']['contact_no']) }}">
+                                <p> {!! strip_tags($data['contactDetails']['contact_no']) !!}</p>
+                            </a>
+                        </div>
+                        <div class="footer-meta mb-15">
+                            <i class="icon-030-pin"></i>
+                            <p>{!! $data['contactDetails']['address'] !!}</p>
+                        </div>
+                        <div class="footer-meta">
+                            <i class="icon-timelapse"></i>
+                            <p></p>
+                            <p>{!! strip_tags($data['contactDetails']['working_time']) !!}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- horizontal line start  -->
+        <div class="container">
+            <div class="hr1"></div>
+        </div>
+        <!-- horizontal line end  -->
+        <div class="copyright__area p-relative">
+            <div class="container">
+                <div class="copyright-content__wrapper">
+                    <div class="copyright__text text-md-start text-center ">
+                        <p>©
+                            {{-- <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            All Rights Reserved by <a href="/"> {{ env('APP_NAME') }}</a>
+                        </p>
+                    </div>
+                    <div class="copyright__nav">
+                        <ul>
+                            <li>
+                                <a href="/privacy-policy">Privacy & Policy</a>
+
+                            </li>
+                            <li>
+                                <a href="/terms-condition">Terms & Condition</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </footer>
 
-
-<button type="button" class="btn btn-floating btn-lg" id="btn-back-to-top">
+<!-- <button type="button" class="btn btn-floating btn-lg" id="btn-back-to-top">
     <i class="fa-solid fa-chevron-up"></i>
-</button>
-{{-- <script src="{{ asset('front/js/jquery-3.6.3.min.js') }}"></script> --}}
-<script src="{{ asset('front/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('front/js/slick.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('front/js/sweetalert2@11.js') }}"></script>
-<script type="text/javascript" src="{{ asset('front/js/toastr.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('front/js/custom.js') }}"></script>
+</button> -->
+
+<script src="{{ asset('front/js/vendor/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('front/js/vendor/waypoints.min.js') }}"></script>
+<script src="{{ asset('front/js/vendor/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('front/js/plugins/meanmenu.js') }}"></script>
+<script src="{{ asset('front/js/plugins/swiper-bundle.min.js') }}"></script>
+<script src="{{ asset('front/js/vendor/magnific-popup.min.js') }}"></script>
+<script src="{{ asset('front/js/plugins/backToTop.js') }}"></script>
+<script src="{{ asset('front/js/plugins/nice-select.min.js') }}"></script>
+<script src="{{ asset('front/js/vendor/ajax-form.js') }}"></script>
+<script src="{{ asset('front/js/plugins/wow.min.js') }}"></script>
+<script src="{{ asset('front/js/plugins/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('front/js/vendor/isotope.pkgd.min.js') }}"></script>
+<script src="{{ asset('front/js/vendor/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ asset('front/js/vendor/jquery.appear.js') }}"></script>
+<script src="{{ asset('front/js/vendor/jquery.odometer.min.js') }}"></script>
+<script src="{{ asset('front/js/vendor/jquery-ui-slider-range.js') }}"></script>
+<script src="{{ asset('front/js/plugins/slick.min.js') }}"></script>
+<script src="{{ asset('front/js/plugins/parallax-scroll.js') }}"></script>
+<script src="{{ asset('front/js/vendor/js_circle-progress.min.js') }}"></script>
 <script src="{{ asset('front/js/main.js') }}"></script>
-<script src="{{ asset('front/js/addtocart.js') }}"></script>
-<script src="{{ asset('front/js/reviewfilter.js') }}"></script>
+
 <!-- scroll to top -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+@yield('script_include')
 <script>
-
-    $(document).ready(function() {
-
-        AOS.init({
-	        duration: 1200
-    //         //     disable: 'mobile',
-    //         //     disable: function() {
-    //         //     var maxWidth = 767;
-    //         //     return window.innerWidth < maxWidth;
-    //         //   }
-    //             // $aos-distance: 50px;
-        });
-
-    });
-</script>
-<script>
-    let mybutton = document.getElementById("btn-back-to-top");
-
-    // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function() {
-        scrollFunction();
-    };
-    //add scroll event
-    document.querySelectorAll("*").forEach(
-        element => element.addEventListener("scroll",
-            ({
-                target
-            }) => scrollFunction()
-        )
-    );
-
-    function scrollFunction() {
-
-        if (
-            document.body.scrollTop > 20 ||
-            document.documentElement.scrollTop > 20
-        ) {
-            mybutton.style.display = "block";
-        } else {
-            mybutton.style.display = "none";
-        }
-    }
-    // When the user clicks on the button, scroll to the top of the document
-    mybutton.addEventListener("click", backToTop);
-
-    function backToTop() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
-
+    jQuery('.menu-expand-category').on("click",function(e){
+        $('.mean-expand')[0].click();
+    })
 </script>
 
-@yield('inline-footer-js')
+</section>
 </body>
-<style>
-    .theme-bg {
-        background-color: var(--theme-yFFEE00) !important;
-    }
-
-    #btn-back-to-top {
-        position: fixed;
-        background-color: var(--txt-b0034AD) !important;
-        height: 37px;
-        width: 37px;
-        bottom: 30px;
-        right: 30px;
-        display: none;
-        border-radius: 100%;
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .fa-solid.fa-chevron-up {
-        color: #FFEE00 !important;
-        font-size: 1.3rem;
-    }
-
-    #btn-back-to-top .fa-solid.fa-chevron-up:hover {
-        font-size: 1rem;
-        transition: 0.3s ease-in;
-
-    }
-
-    .header-cart {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: center;
-        margin-right: 20px;
-        padding-top: 5px;
-        position: relative;
-        width: 32px;
-        height: auto;
-    }
-
-    .header-cart span {
-        position: absolute;
-        bottom: 25px;
-        right: -10px;
-        border-radius: 50%;
-        background: #E51B21;
-        width: 20px;
-        height: auto;
-        text-align: center;
-        font-size: 14px;
-        color: #fff;
-    }
-
-    .user-name {
-        /* text-align: right; */
-    }
-
-    .download-btn {
-        text-decoration: none;
-        font-size: 16px;
-        font-weight: 500;
-        color: #000000;
-    }
-
-    .download-btn:hover {
-        color: var(--txt-b0034AD);
-        text-decoration-line: underline;
-    }
-</style>
-
 </html>

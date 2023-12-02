@@ -5,13 +5,13 @@
 
         <!--begin::Symbol-->
         <div class="symbol bg-white-o-15 mr-3">
-            <span class="symbol-label text-success font-weight-bold font-size-h4">{{ substr(Auth::user()->name, 0, 1) }}</span>
+            <span class="symbol-label text-success font-weight-bold font-size-h4">{{ substr(Auth::user()?->company_name, 0, 1) }}</span>
         </div>
 
         <!--end::Symbol-->
 
         <!--begin::Text-->
-        <div class="text-white m-0 flex-grow-1 mr-3 font-size-h5">{{ Auth::user()->name }}</div>
+        <div class="text-white m-0 flex-grow-1 mr-3 font-size-h5">{{ Auth::user()?->company_name }}</div>
 
         <!--end::Text-->
     </div>

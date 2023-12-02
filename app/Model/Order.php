@@ -5,6 +5,9 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Model\User;
+use App\Model\OrderItems;
+
 class Order extends Model
 {
     //
@@ -18,22 +21,55 @@ class Order extends Model
         'tax_amount',
         'order_total',
         'transporter',
+        'status',
+    ];
+
+    protected $hidden = [
+        'updated_at',
     ];
 
     public function user()
     {
-        return $this->belongsTo(user::class, 'created_by', 'id');
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return $timestamp=date('d-m-Y',strtotime($value));
+    }
+
 
     public function orderItems()
     {
-        return $this->hasMany(orderItems::class, 'order_id', 'id');
+        return $this->hasMany(OrderItems::class, 'order_id', 'id');
+    }
+
+    public function scopeWithOrderItemsCount($query)
+    {
+        return $query->withCount([
+            'orderItems as pending_items' => function ($query) {
+                $query->where('status', false);
+            },
+            'orderItems as delivered_items' => function ($query) {
+                $query->where('status', true);
+            },
+            'orderItems as total_items' => function ($query) {
+
+            }
+        ]);
     }
 
     public function orderProducts()
     {
-        return $this->belongsToMany(orderItems::class)->withPivot('products_id', 'id');
+        return $this->belongsToMany(OrderItems::class)->withPivot('products_id', 'id');
     }
+
+
+    public function getOrderPdfAttribute($value)
+    {
+        return env('APP_URL') . 'storage/orders/' . $value;
+    }
+
     public function getOrderTotal($value)
     {
         $decimal = round($value - ($no = floor($value)), 2) * 100;

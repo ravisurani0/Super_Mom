@@ -24,6 +24,12 @@ class CreateProductsTable extends Migration
             $table->string('hsn_code')->nullable();
             $table->integer('carton_capacity')->nullable();
 
+            $table->boolean('isBestseller')->default(false);
+            $table->boolean('isNewProduct')->default(false);
+            $table->string('selling_price')->nullable();
+            $table->string('meta_keywords')->nullable();
+            $table->longText('long_description')->nullable();
+            
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();

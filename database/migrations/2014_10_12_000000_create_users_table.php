@@ -20,9 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('whatsapp_no')->nullable()->unique();
             $table->string('address')->nullable();
             $table->string('email')->nullable()->unique();
-            $table->unsignedInteger('role');
             $table->string('seller_id')->nullable();
-            $table->boolean('requested_seller_id')->nullable();
             $table->double('discount')->nullable();
             $table->double('commission')->nullable();
             $table->double('account_balance')->nullable();
