@@ -1,0 +1,615 @@
+{
+	"info": {
+		"_postman_id": "37ea3568-9eae-433e-9548-252e53a8308a",
+		"name": "supar-mom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24738956",
+		"_collection_link": "https://lively-astronaut-986774.postman.co/workspace/New-Team-Workspace~334249d0-53d3-463c-9da4-91247a44b2e3/collection/24738956-37ea3568-9eae-433e-9548-252e53a8308a?action=share&source=collection_link&creator=24738956"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"mobile_no\": \"devvaibhav1234@gmail.com\",\r\n    \"password\": \"password\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mobile_no\": \"4444444444\",\r\n    \"email\": \"company4@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/reset-password"
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seller_id\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Seller Id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/generate-sellerId"
+					},
+					"response": []
+				},
+				{
+					"name": "Signup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTY5NjU4NTE4NiwiZXhwIjoxNjk2NTg4Nzg2LCJuYmYiOjE2OTY1ODUxODYsImp0aSI6ImhJamFrSzNuWjc5M2JWV0IiLCJzdWIiOjMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.d25rMLci3VS661dB6xnEb64sHDr7Jd1-kk_8gw4qQxs"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"company_name\": \"devvaibhav1234\",\r\n    \"mobile_no\": \"9789879876\",\r\n    \"email\": \"gjbhblnpyj@hldrive.com\",\r\n    \"address\": \"address\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\": \"qd6NGK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/otp-verify"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mobile_no\": \"4444444444\",\r\n    \"otp\": \"Ade2cs\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/update-password"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get Product Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "product 4",
+									"type": "default"
+								},
+								{
+									"key": "short_name",
+									"value": "product 4",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "price",
+									"value": "price",
+									"type": "default"
+								},
+								{
+									"key": "gst_rate",
+									"value": "gst_rate",
+									"type": "default"
+								},
+								{
+									"key": "hsn_code",
+									"value": "789\n",
+									"type": "default"
+								},
+								{
+									"key": "carton_capacity",
+									"value": "carton_capacity",
+									"type": "default"
+								},
+								{
+									"key": "status",
+									"value": "status",
+									"type": "default"
+								}
+							]
+						},
+						"url": "{{baseURL}}/products/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By Category Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{baseURL}}/category/products/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"JUICE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/products"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get category By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "product 4",
+									"type": "default"
+								},
+								{
+									"key": "short_name",
+									"value": "product 4",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "price",
+									"value": "price",
+									"type": "default"
+								},
+								{
+									"key": "gst_rate",
+									"value": "gst_rate",
+									"type": "default"
+								},
+								{
+									"key": "hsn_code",
+									"value": "789\n",
+									"type": "default"
+								},
+								{
+									"key": "carton_capacity",
+									"value": "carton_capacity",
+									"type": "default"
+								},
+								{
+									"key": "status",
+									"value": "status",
+									"type": "default"
+								}
+							]
+						},
+						"url": "{{baseURL}}/category/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get category List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "{{baseURL}}/category"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get Order By User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"startDate\": \"2023-11-01\",\r\n    // \"endDate\": \"2023-11-01\",\r\n    // \"status\": true,\r\n    \"month\":10,\r\n    \"year\":2022\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/user_orders"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{baseURL}}/order/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Place Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order_items\": [\r\n        {\r\n            \"product_id\": 32,\r\n            \"qnt\": 3\r\n        },\r\n        {\r\n            // \"product_id\": 34,\r\n            // \"qnt\": 2\r\n        }\r\n    ],\r\n    \"transporter\": \"transporter\"\r\n    // \"order_subtotal\": \"500\",\r\n    // \"discount\": 10,\r\n    // \"tax_rates\": \"5\",\r\n    // \"order_total\": \"500\",\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/order"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Get User Cart",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{baseURL}}/cart"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart_items\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 3,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 5,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 6,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 17,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 18,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 15,\r\n            \"qnt\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/cart"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{Token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart_items\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 3,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 5,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 6,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 17,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 18,\r\n            \"qnt\": 1\r\n        },\r\n        {\r\n            \"product_id\": 15,\r\n            \"qnt\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/cart"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{Token}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://super_mom.local/api",
+			"type": "string"
+		},
+		{
+			"key": "Token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDA2NjU4MzJkZjAzZmNmYWYxNGExNDY4OTA5MjJkYzQwNmZlNzNiYjI3NjJlMzFmNTNjZGE0YzhhNTg5ZDkxZGUwYzJmNzE5MWE0YWI0ZDkiLCJpYXQiOjE2OTkyNzQwNzQuMDg0MTUxLCJuYmYiOjE2OTkyNzQwNzQuMDg0MTUzLCJleHAiOjE3MzA4OTY0NzQuMDE2MTM4LCJzdWIiOiI2Iiwic2NvcGVzIjpbXX0.XrwodLWuxyCpVwzCSNc2E30re4ayuSbCpNz-ulqML4okK5ZjSI8SBhzyXEJgMyuZL2gSFhJ7mkwyVO0velHELjgdvVK8eThSGiL4FrCCD5gSGGa3H4fGkEmKp7kWLgV9dCDCC1vpunQTEU4pJ7psNH25-EywepJY-MdIMxvHgZwqWq1f1gXzhvHoCnbR7qm1iHAgOc1_1cyDq7-qWxPfR5L2X6Y1kTPSrqbju_vb5lsc9J076tny1epWOz_goNZs7ngmDWxwY4qr-PKk5a-uhTtgsgKXhkLEBNrnnRrDKb5Q8Yd1f3uR0oTtaeyUachh4gDXro-Wq_iddhRvHeBpzDexnhThGG2yl_8uQQRa80SPPUdSvE75HzUuXjsTFkbOmhgDP5zxuRfvfuuvP-5UtpXq6gooTRquHG2SoVK_pSjrjbLll5TRuMDbs80MjDZrBvvj6DvmfGOqvN05hI7hTJimuaKbui263K-4Bz3t91BbFk4CT7gSvl_5swpRi9-7bL_02nU1u8Iq3FnRm279RVKZZlpx04rAPOCqxmGD_IyfC5sF-qowgkdzJfCzPoWr_uuaFjrSyt_gc_LrEHzmFojgiTx5--Y0oZCTGJzV1cL9eNTewk4WHqvmJ9aDt2tPUYPz0_GWaiSczLS37h2_SmAZwypX_WJ6tYujpuSI2oE",
+			"type": "string"
+		},
+		{
+			"key": "baseURL",
+			"value": "https://supermom.7technosoftsolutions.com/api",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "Token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZWU2Y2FiYzAxZGQwMzM2ZTc0ZTRlYjhlNjYyYTI1NzkxOWVlOGMxYWZlZDBmYmRkODA0M2Y4OTYxZDIyZTI3ODMyMTZmMTlhYTE4MTFhNjciLCJpYXQiOjE2OTgzMTk3MTQuOTI1NTI5LCJuYmYiOjE2OTgzMTk3MTQuOTI1NTM0LCJleHAiOjE3Mjk5NDIxMTQuNzI0NTAyLCJzdWIiOiI2Iiwic2NvcGVzIjpbXX0.p6tcwwHYjRrDVYfHq4CqDFUD6FBcfZuFFx5tarSEDnG8G3XkH_s6mmdJowk5ZQbPnKSj4SvpaJJsMstded1S7Mh7uNPft3kaDArAriWrNKmVZPC9N6-n9odFH0tCoyiNh2qw9941Pi0-S9hh8KPPw2GZSEhvMCZl-fUYDZU-_MduNbkroDugi2lJqN_mKfdqOrlprQeS8liikHwj12x90fQP2O5Y7hXB0fssrTTNFF4crVGgT-UZVfOFxsss87xbFOanJHu90BgrpDADxNYn174r147q2vwYHfZCMVx-oVhj-upOsb8kR7Ws-IrH78Q0NfPKkq-rCS2MOePB6EUA9-XZrOPmdq0tIDwij4pgEaBKnaY9e1BhSyFEoi8leIa5-t2n35OjwqgLdc1fZ4INHA3bjL7mkPHA36yeRW9CLZ9cXlMuaI8wBokKkQpD6QslQO3NQPFGvCk2GpRPieweq6jBlKXp3HIei7arNXyeGF5DO2C7p2Tp470wSmiBMSEHFmtF7_rDf-JcJuGuf3TE1x2n6m50Jgdqc_iDSdGuj9E5F_wZid8LcM_they-8hzEB4JHvWOZEe1FXgqeaz3550HQxYDxyk7dmhvxn0t771BA9DgJwwQTx7BL9xp0hcpG2tGrkloIyDiNKk0umkqrEPHfRgXqhOn3378BU1H9-m4",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
